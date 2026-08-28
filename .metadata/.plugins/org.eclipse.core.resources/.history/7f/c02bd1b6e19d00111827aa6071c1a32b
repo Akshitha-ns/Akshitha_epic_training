@@ -1,0 +1,206 @@
+package epic_training;
+
+import java.util.Scanner;
+
+
+class Customer1{
+    int cusId;
+    String cusName;
+    Customer[] cusArr = new Customer[100];
+    int index = 0;
+	public float accBalance;
+    Customer(String name,float bal,int id){
+        this.cusName = name;
+        this.accBalance = bal;
+        this.cusId = id;
+    }
+    Customer(){
+        
+    }
+    
+    void createCustomer(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the Customer name: ");
+        String name = in.nextLine();
+        System.out.println("Enter the Customer Balance: ");
+        float bal = in.nextFloat();
+        for(;;) {
+        try {
+        	if(bal<0) {
+        		throw new ArithmeticException();
+        	}else {
+        		System.out.println("Valid balance");
+        		break;
+        	}
+        }catch(ArithmeticException e) {
+        	System.out.println("Enter correct balance without being negative:");
+        	bal=in.nextFloat();
+        }
+        }
+        Customer cus = new Customer(name,bal,index);//#100
+        cusArr[index] = cus;
+        index++;
+        System.out.println("Customer Created Successfully");
+    }
+    
+    void displayCustomer(){
+        for(int i=0;i<index;i++){
+            System.out.println(cusArr[i].cusName);
+            System.out.println(cusArr[i].accBalance);
+            System.out.println(cusArr[i].cusId);
+        }
+    }
+}
+
+
+class GiftCard{
+    int giftCardId;
+    int cusId;
+    int pin;
+    float cardBalance;
+    String cardStatus;
+    String cardLevel;
+     GiftCard cardarr[] = new GiftCard[100];
+    int index =0;
+    
+    GiftCard(){
+        
+    }
+    
+    GiftCard(int id,int cusId,int pin,float bal,String status,String level){
+        this.giftCardId = id;
+        this.cusId = cusId;
+        this.pin = pin;
+        this.cardBalance = bal;
+        this.cardStatus = status;
+        this.cardLevel = level;
+    }
+    
+    void createCard(Customer cus){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the customer id: ");
+        int cusId = in.nextInt();
+        System.out.println("Enter the customer pin: ");
+        int pin = in.nextInt();
+        System.out.println("Enter the customer cardBal: ");
+        float cardBal = in.nextFloat();
+        if(cusId >= 0 && cusId < cus.index) {
+            cus.cusArr[cusId].accBalance -= cardBal;
+            
+            GiftCard gc = new GiftCard(index,cusId,pin,cardBal,"ACTIVE","BEGINNER");
+            cardarr[index] = gc;
+            index++;
+            
+            System.out.println("Card Created");
+        }
+        else {
+            System.out.println("Invalid Customer ID");
+        }
+    }
+    void displayCard() {
+    	for(int i=0;i<index;i++){
+            System.out.println(cardarr[i].cusId);
+            System.out.println(cardarr[i].pin);
+            System.out.println(cardarr[i].cardBalance);
+            System.out.println(cardarr[i].cardStatus);
+            System.out.println(cardarr[i].cardLevel);
+    }
+}
+    void topup(Customer cus) {
+    	Scanner in = new Scanner(System.in);
+    	System.out.println("Enter your GiftCard id:");
+    	int id=in.nextInt();
+    	if(id<index && id>=0) {
+    		if(cardarr[id].giftCardId==id && cardarr[id].cardStatus.equalsIgnoreCase("Active")) {
+    			System.out.println("Enter the pin");
+    			int pin = in.nextInt();
+    			if(cardarr[id].pin==pin) {
+    				System.out.println("Enter the amount");
+    				float amt = in.nextFloat();
+    				cus.cusArr[cardarr[id].cusId].accBalance -= amt;
+    				cardarr[id].cardBalance+=amt;
+    			}
+    			else {
+    				System.out.println("Incorrect pin");
+    			}
+    		}else {
+    			System.out.println("Invaild card or card may be blocked");
+    		}
+    		
+    	}else {
+    		System.out.println(" invalid id");
+    	}
+    }
+
+}
+class product{
+	String proname;
+	String probrand;
+	int proprice;
+	int proquality;
+	product proarr[]=new product[100];
+	int index=0;
+	product(){
+		
+	}
+	product(String n,String b,int p,int q){
+		this.proname=n;
+		this.probrand=b;
+		this.proprice=p;
+		this.proquality=q;
+	}
+	void createProduct(){
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter the product name:");
+		String name = in.nextLine();
+		System.out.println("Enter the brand name:");
+		String brand = in.nextLine();
+		System.out.println("Enter the Price:");
+		int price = in.nextInt();
+		System.out.println("Enter the Quatity:");
+		int quality = in.nextInt();
+		product pro = new product(name,brand,price,quality);
+		proarr[index]=pro;
+		index++;
+		System.out.println("Product created Sucessfully");
+	}
+}
+public class GiftCardApp{
+	public static void main(String[] args) {
+	    Scanner in = new Scanner(System.in);
+	    Customer cus = new Customer();//#1000
+	    GiftCard gc = new GiftCard();
+	    product pro = new product();
+		while(true){
+		    System.out.println(" 1)Create Customer\n 2)Display Customer\n 3)Create Card\n 4)Display Card\n 5)Topup\n 6)Create product");
+		    int n = in.nextInt();
+		    switch(n){
+		        case 1:{
+		            cus.createCustomer();
+		            break;
+		        }
+		        case 2:{
+		            cus.displayCustomer();
+		            break;
+		        }
+		        case 3:{
+		            gc.createCard(cus);
+		            break;
+		        }
+		        case 4:{
+		            gc.displayCard();
+		            break;
+		        }
+		        case 5:{
+		            gc.topup(cus);
+		            break;
+		        }
+		        case 6:{
+		        	pro.createProduct();
+		        	break;
+		        }
+		    }
+		}
+		 
+	}
+}

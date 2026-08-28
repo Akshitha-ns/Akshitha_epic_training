@@ -1,0 +1,92 @@
+package epic_training;
+import java.io.*;
+public class ExceptionHandling {
+	public static void main(String[] args) {
+File f = new File("text.txt");
+try {
+	FileReader fr = new FileReader(f);
+}
+catch(FileNotFoundException e){
+	e.printStackTrace();
+	System.out.println("not readable");
+}finally {
+	System.out.println("Executed");
+}
+}
+}
+///public class Exception {
+/// public static void main(String[] args) {
+/// String name = "";
+/// if(name==""){
+/// try{
+/// 	throw new NameNotFound("Name is not there");
+/// }
+/// catch(NameNotFound ne){
+/// ne.printStackTrace();
+/// }
+/// else{
+/// System.out.println(name);
+/// }
+/// }
+/// }
+/// 
+/// class NameNotFound extends Exception
+/// 
+/// 
+/// 
+/// 
+/// 
+/*
+Exception-->interruption in code
+Three type of error
+error
+checked expression (compile time)
+unchecked expression (Runtime)
+
+
+error
+you can't handle this type error
+stack overflow
+out of memory
+virtual machine error
+
+checked expression (compile time)
+Syntax based exception
+compiler inside
+IO exception
+file not found exception
+SQL exception
+class  not found exception
+interrupted expression
+
+unchecked expression (Runtime)
+JVM
+Arithmetic exception
+array index out of bound
+string out of bound
+divide by zero
+
+mainly used block to handle error 
+try
+catch finally
+throw 
+throws
+
+Method body inside
+try{
+hold exception(wrapping)
+}
+catch(Exception){
+works when exception occurs
+}
+finally{
+always execute the block
+}
+
+method header 
+throw 
+throws
+
+throws are used for user defined Exception 
+
+*/

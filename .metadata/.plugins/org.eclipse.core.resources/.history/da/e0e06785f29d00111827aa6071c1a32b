@@ -1,0 +1,29 @@
+package epic_training;
+
+interface EmployeData{
+    void display();
+}
+
+class FullTimeEmp implements EmployeeData{
+    public void display(){
+        System.out.println("FullTime");
+    }
+}
+class PartTimeEmp implements EmployeeData{
+    public void display(){
+        System.out.println("PartTime");
+    }
+}
+
+
+
+public class InterfaceExample {
+
+	public static void main(String[] args) {
+		EmployeeData emp = new FullTimeEmp();
+		emp.display();
+
+	}
+
+}
+

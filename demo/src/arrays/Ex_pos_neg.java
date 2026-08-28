@@ -1,0 +1,56 @@
+package arrays;
+import java.util.Scanner;
+public class Ex_pos_neg {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Enter the size of array:");
+		int n = sc.nextInt();
+
+		System.out.println("Enter the elements:");
+		int arr[] = new int[n];
+
+		for(int i = 0; i < n; i++) {
+		    arr[i] = sc.nextInt();
+		}
+
+		int pos[] = new int[n];
+		int neg[] = new int[n];
+
+		int p = 0, ne = 0;
+
+		for(int i = 0; i < n; i++) {
+		    if(arr[i] >= 0) {
+		        pos[p++] = arr[i];
+		    } else {
+		        neg[ne++] = arr[i];
+		    }
+		}
+
+		int i = 0, j = 0, k = 0;
+
+		while(i < p && j < ne) {
+		    arr[k++] = pos[i++];
+		    arr[k++] = neg[j++];
+		}
+
+		while(i < p) {
+		    arr[k++] = pos[i++];
+		}
+
+		while(j < ne) {
+		    arr[k++] = neg[j++];
+		}
+
+		System.out.println("Rearranged array:");
+
+		for(int x = 0; x < n; x++) {
+		    System.out.print(arr[x] + " ");
+		}
+
+		sc.close();
+
+	}
+
+}

@@ -1,0 +1,47 @@
+package epic_training;
+
+
+abstract class Emp{
+    String name;
+    Emp(String n){
+        this.name = n;
+    }
+    abstract int  claculateSal();
+
+}
+
+class FullTimeEmployee extends Emp{
+
+int salary;
+
+FullTimeEmployee(String name,int sal){
+    super(name);
+    this.salary = sal;
+}
+
+int claculateSal(){
+   return salary;
+}
+}
+
+class PartTimeEmployee extends Emp {
+int salary;
+PartTimeEmployee(String n,int sal,int hours){
+    super(n);
+    this.salary = sal * hours;
+}
+ int claculateSal(){
+    return salary;
+}
+}
+
+public class Abstract {
+public static void main(String[] a){
+           Emp obj1 = new FullTimeEmployee("Dharaneesh",10000);
+           Emp obj2= new PartTimeEmployee("Naveen",1000,12);
+        
+           System.out.println(obj1.claculateSal());
+           System.out.println(obj2.claculateSal());
+           
+}
+}
